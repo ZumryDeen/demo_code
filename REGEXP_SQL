@@ -1,0 +1,28 @@
+**Schema (MySQL v8.0)**
+
+    CREATE TABLE item (
+     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+     name VARCHAR(20) NOT NULL,
+     description VARCHAR(50) NOT NULL,
+     create_date DATE NOT NULL
+    );
+    
+    INSERT INTO item (name, description, create_date) VALUES
+    ('Hammer', 'A beautiful, hand made hammer', MAKEDATE(2015, 10)),
+    ('Nail', '50 nails.', MAKEDATE(2015, 11)),
+    ('Shelf', 'Excellent shelf material', MAKEDATE(2015, 15)),
+    ('Orange', 'An organically grown orange.', MAKEDATE(2015, 30));
+
+---
+
+**Query #1**
+
+    select name,description FROM item where description REGEXP '^.{5,}[\.]$' AND create_date > '2015-1-15';
+
+| name   | description                  |
+| ------ | ---------------------------- |
+| Orange | An organically grown orange. |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/sxMZfTSccBVyP97BmRkY2y/0)
