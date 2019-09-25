@@ -1,0 +1,33 @@
+**Schema (MySQL v5.7)**
+
+    CREATE TABLE cargo (
+     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+     weight DOUBLE NOT NULL,
+     ref INT NOT NULL ,
+     declaration VARCHAR(50) NOT NULL
+    );
+    
+    INSERT INTO cargo (weight,ref,declaration) VALUES 
+     (10.5,5,"toxic"),
+     (20.2,2, "flamable"),
+     (1.6,2,"toxic"),
+     (12.4,5, "radioactive"),
+     (30,5, "flamable");
+
+---
+
+**Query #1**
+
+    SELECT declaration, GROUP_CONCAT(weight) AS weights FROM cargo GROUP BY declaration;
+
+| declaration | weights  |
+| ----------- | -------- |
+| flamable    | 20.2,30  |
+| radioactive | 12.4     |
+| toxic       | 10.5,1.6 |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/jmBHKqg8qUX2bNQeWtJJYM/4)
+ 
+ 
